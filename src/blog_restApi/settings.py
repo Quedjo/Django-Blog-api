@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     #3rd party apps
     "rest_framework",
     "corsheaders",
+    "rest_framework.authtoken",
 
     #local apps
     "accounts",
@@ -52,8 +53,14 @@ INSTALLED_APPS = [
 REST_FRAMEWORK = { 
     
     "DEFAULT_PERMISSION_CLASSES": [
-    "rest_framework.permissions.IsAuthenticated",
+        "rest_framework.permissions.IsAuthenticated",
 ],
+
+    "DEFAULT_AUTHENTICATION_CLASSES": [
+        "rest_framework.authentication.SessionAuthentication",
+        "rest_framework.authentication.TokenAuthentication",
+],
+
 }
 
 AUTH_USER_MODEL = "accounts.CustomUser"
@@ -70,11 +77,11 @@ MIDDLEWARE = [
 ]
 
 CORS_ORIGIN_WHITELIST = (
-#"http://localhost:3000",
+"http://localhost:3000",
 "http://localhost:8000",
 )
 
-#CSRF_TRUSTED_ORIGINS = ["http://localhost:3000"] port number needs to be configured to suit the default port number of frontend incase forms are being used by front end 
+CSRF_TRUSTED_ORIGINS = ["http://localhost:3000"] #port number needs to be configured to suit the default port number of frontend incase forms are being used by front end 
 
 ROOT_URLCONF = 'blog_restApi.urls'
 
